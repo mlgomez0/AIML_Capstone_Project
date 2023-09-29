@@ -5,7 +5,7 @@
 For the App to work, it is needed to have the following packages installed:
 - node
 - npm
-If you have those installed in you computer, please install them first.
+If you don't have those installed in you computer, please install them first.
 
 To starts the development server.
 ```

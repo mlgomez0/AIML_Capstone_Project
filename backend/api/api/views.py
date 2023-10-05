@@ -1,12 +1,16 @@
-from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Item
+from rest_framework.response import Response
+
+from .models import ApiResponse
 from .serializers import ItemSerializer
 
-@api_view(['GET'])
-def item_list(request):
-    items = [
-        Item(first_name='Peter', last_name='Thomas'),
-    ]
-    serializer = ItemSerializer(items, many=True)
+
+@api_view(['POST'])
+def predict(request):
+
+    # Get the parameter named 'q' from the request
+    q = request.GET.dict()["q"]
+    response = ApiResponse();
+    response.text = f'Hello {q}'
+    serializer = ItemSerializer(response, many=False)
     return Response(serializer.data)

@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import item_list
+from .views import predict
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('items/', item_list, name='item-list')
+    path('predict', predict, name='item-list')
 ]

@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Item
+from .models import ApiResponse
 
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Item
+        model = ApiResponse
         fields = '__all__'

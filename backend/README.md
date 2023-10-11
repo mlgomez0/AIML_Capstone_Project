@@ -12,6 +12,8 @@ This project contains the backend for the natural language processing project.
 
 ## Installation
 
+Go to the backend/ directory and use the following command.
+
 ```bash
 pip install -r requirements.txt
 ```

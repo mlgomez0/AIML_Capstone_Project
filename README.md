@@ -20,7 +20,17 @@ To start the test runner.
 npm test
 ```
 
+## To use the vector store Pinecone
+
+Configure the following in your .env
+```
+PINECONE_API_KEY=xxxxx
+PINECONE_ENV=xxxx
+PINECONE_METRICS=xxxx
+PINECONE_DIMENSIONS=xxx
+```
 ## Running the Backend Tests
+
 ```
 python -m unittest backend/tests/file_name.py
 ```

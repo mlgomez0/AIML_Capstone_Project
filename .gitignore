@@ -1,4 +1,4 @@
-
+.env
 venv/
 backend/local_pdfs
 __pycache__/

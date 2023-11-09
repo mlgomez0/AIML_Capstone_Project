@@ -3,4 +3,5 @@ venv/
 backend/local_pdfs
 __pycache__/
 /.vs
-
+.DS_Store
+backend/docs/chroma/

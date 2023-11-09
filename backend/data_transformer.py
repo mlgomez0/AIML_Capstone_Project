@@ -1,41 +1,45 @@
 import nltk
-nltk.download('punkt')
 import spacy
-nlp = spacy.load('en_core_web_sm')
 from langchain.embeddings.spacy_embeddings import SpacyEmbeddings
 from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.embeddings.openai import OpenAIEmbeddings
+import os
 
 class DataTransformer:
     def __init__(self):
-        self.nlp = spacy.load("en_core_web_sm")
+        self.tokens = []
+        self.embeddings = []
 
     def clean_text_with_nlp(self, text):
-        doc = self.nlp(text)
+        nltk.download('punkt')
+        nlp = spacy.load("en_core_web_sm")
+        doc = nlp(text)
         cleaned_tokens = [token.lemma_ for token in doc if not token.is_stop and token.is_alpha]
         cleaned_text = ' '.join(cleaned_tokens)
         return cleaned_text
 
-    #def tokenize_words(self, text):
-        tokens = text.split()
-        return tokens
-    
-    #sentence tokenization using NLTK library
-    def tokenize_sentence(self, text):
-        tokens = nltk.sent_tokenize(text)
-        return tokens
-    
-    #sentence tokenization using spaCy library
-    #def tokenize_sentence(self, text):
-        doc = nlp(text)
-        tokens = list(doc.sents)
-        return tokens
+    def load_tokens_from_docs(
+            self, docs, method='RecursiveCharacter',
+            chunk_size=1500, chunk_overlap=150
+        ):
+        if method == 'RecursiveCharacter':
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size = chunk_size,
+                chunk_overlap = chunk_overlap
+            )
+            self.tokens = text_splitter.split_documents(docs)
 
-    def get_spacy_embedding(self, tokens):
+    def open_ai_embeddings(self):
+        open_ai_api_key = os.environ["OPENAI_API_KEY"]
+        embedder = OpenAIEmbeddings(openai_api_key=open_ai_api_key)
+        return embedder
+        
+
+    def get_spacy_embedding(self):
         embedder = SpacyEmbeddings()
-        embeddings = embedder.embed_documents(tokens)
-        return embeddings
+        return embedder
     
     def get_hugging_face_embedding(self, model_name, tokens):
         embedder = HuggingFaceEmbeddings(model_name=model_name)
-        embeddings = embedder.embed_documents(tokens)
-        return embeddings
+        return embedder

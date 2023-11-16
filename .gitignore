@@ -5,3 +5,4 @@ __pycache__/
 /.vs
 .DS_Store
 backend/docs/chroma/
+backend/api/api/modules_ai/docs/chroma

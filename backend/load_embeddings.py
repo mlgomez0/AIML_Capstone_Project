@@ -1,6 +1,6 @@
-from data_loader import DataLoader
-from data_transformer import DataTransformer
-from vector_store import VectoreStores
+from api.api.modules_ai.data_loader import DataLoader
+from api.api.modules_ai.data_transformer import DataTransformer
+from api.api.modules_ai.vector_store import VectoreStores
 import sys
 import os
 

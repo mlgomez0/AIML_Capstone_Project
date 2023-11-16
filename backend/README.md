@@ -34,4 +34,22 @@ This is a in-unit vector store. To create embeddings from files in a folder and 
 CHROMA_PATH=db_path python load_embeddings.py chroma files_directory
 ```
 
+Then to load the vector store and do similarity searh, use the following:
+
+Set the environmental variable "CHROMA_PATH" and create an embedder.
+
+```bash
+from backend.vector_store import VectoreStores
+from backend.data_transformer import DataTransformer
+
+data_transformer = DataTransformer()
+embedder = data_transformer.get_spacy_embedding()
+
+vectorDb = VectorStores().load_chroma_vectorstore(embedder)
+question="something related to the docs"
+vectorDb.similarity_search(question,k=3)
+vectorDb._collection.count()
+
+```
+
 Currently, the project only supports PDF format

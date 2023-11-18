@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from backend.data_loader import DataLoader
+from modules_ai.data_loader import DataLoader
 
 class TestDataLoader(unittest.TestCase):
     def test_check_path_pattern_with_pdf_extension(self):

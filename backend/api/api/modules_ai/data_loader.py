@@ -1,10 +1,10 @@
-import PyPDF2
+from langchain.document_loaders import PyPDFLoader
 import re
 
 class DataLoader:
     def __init__(self, path):
         self.path = path
-        self.text = ''
+        self.pages = None
         self.extension = ''
 
     def check_path_pattern(self):
@@ -17,8 +17,10 @@ class DataLoader:
     def load(self):
         self.check_path_pattern()
         if self.extension == 'pdf':
-            reader = PyPDF2.PdfReader(self.path)
-            for page in reader.pages:
-                self.text += page.extract_text()
+            loader = PyPDFLoader(self.path)
+            pages = loader.load()
+            self.pages = pages
+
+            
 
     

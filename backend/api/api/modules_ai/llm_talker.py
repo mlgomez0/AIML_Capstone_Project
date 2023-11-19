@@ -5,6 +5,7 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 
 class LlmTalker:
+    
     def __init__(self):
         self.vector_DB = None
         self.llm = None

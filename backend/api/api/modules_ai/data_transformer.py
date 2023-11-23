@@ -40,6 +40,9 @@ class DataTransformer:
         embedder = SpacyEmbeddings()
         return embedder
     
-    def get_hugging_face_embedding(self, model_name, tokens):
-        embedder = HuggingFaceEmbeddings(model_name=model_name)
+    def get_hugging_face_embedding(self, model_name=None):
+        if model_name:
+            embedder = HuggingFaceEmbeddings(model_name=model_name)
+        else:
+            embedder = HuggingFaceEmbeddings()
         return embedder

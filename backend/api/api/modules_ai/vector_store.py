@@ -4,7 +4,7 @@ import os
 
 class VectoreStores:
     def __init__(self):
-        self.persist_directory = os.environ["CHROMA_PATH"]
+        self.persist_directory = "docs/chroma/"
 
     def get_pinecone_vectorstore(self):
         api_key = os.environ["PINECONE_API_KEY"]

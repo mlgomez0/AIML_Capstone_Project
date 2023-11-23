@@ -1,7 +1,9 @@
 from .vector_store import VectoreStores
 from .data_transformer import DataTransformer
 from langchain.chat_models import ChatOpenAI
+from langchain.llms import HuggingFaceHub
 from langchain.chains import RetrievalQA
+from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 
 class LlmTalker:
@@ -12,7 +14,22 @@ class LlmTalker:
         self.talker = None
         self.conversation = []
 
-    def start_chat(self):
+    def start_chat(self, question):
+        repo_id = "google/flan-t5-xxl"
+        llm = HuggingFaceHub(
+        repo_id=repo_id, model_kwargs={"temperature": 0.5, "max_length": 512}
+        )
+        llm_chain = load_qa_chain(llm, chain_type='stuff')
+        chroma = VectoreStores()
+        embedder = DataTransformer().get_hugging_face_embedding()
+        self.vector_DB = chroma.load_chroma_vectorstore(embedder)
+        docs = self.vector_DB.similarity_search(question)
+        response = llm_chain.run(input_documents=docs, question=question)
+        return response
+    
+  
+    
+    def start_chat_openai(self):
         template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Use three sentences maximum. Keep the answer as concise as possible. Always say "thanks for asking!" at the end of the answer. 
         {context}
         Question: {question}
@@ -26,11 +43,9 @@ class LlmTalker:
             self.llm,
             retriever=self.vector_DB.as_retriever(),
             return_source_documents=True,
-            chain_type_kwargs={"promp": TEMPLATE_PROMPT}
+            chain_type_kwargs={"prompt": TEMPLATE_PROMPT}
         )
     
     def chat(self, question):
-        self.start_chat()
-        response = self.talker({"query": question})
-        self.conversation.append({question: response})
-        return response["result"], response["source_documents"][0]
+        response = self.start_chat(question)
+        return response

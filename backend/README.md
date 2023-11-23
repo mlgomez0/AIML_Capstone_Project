@@ -10,6 +10,12 @@ This project contains the backend for the natural language processing project.
 - [Contributing](#contributing)
 - [License](#license)
 
+# .ENV
+
+Set the following environmental variables
+
+HUGGINGFACEHUB_API_TOKEN
+
 ## Installation
 
 Go to the backend/ directory and use the following command.
@@ -31,7 +37,7 @@ python manage.py runserver
 This is a in-unit vector store. To create embeddings from files in a folder and store them in a vector store, you can run the following script inside the backend directory:
 
 ```bash
-CHROMA_PATH=db_path python load_embeddings.py chroma files_directory
+CHROMA_PATH=docs/chroma/ python load_embeddings.py chroma files_directory
 ```
 
 Then to load the vector store and do similarity searh, use the following:

@@ -19,7 +19,7 @@ if __name__ == "__main__":
             docs.extend(pages)
         data_transformer = DataTransformer()
         data_transformer.load_tokens_from_docs(docs)
-        embedder = data_transformer.get_spacy_embedding()
+        embedder = data_transformer.get_hugging_face_embedding()
         chroma = VectoreStores()
         vectorDB = chroma.get_chroma_vectorstore(
             data_transformer.tokens,

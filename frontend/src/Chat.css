@@ -20,12 +20,12 @@
     margin: 5px 0;
     padding: 10px;
     border-radius: 5px;
-    background-color: lightgray;
+    background-color: #ffe4e4;
 }
 
 .message.you {
     text-align: right;
-    background-color: lightblue;
+    background-color: #d4fcf8;
 }
 
 .chat-input {
@@ -43,7 +43,7 @@
 .chat-input button {
     border: none;
     padding: 10px;
-    background-color: #2196f3;
+    background-color: #61dafb;
     color: white;
     cursor: pointer;
 }

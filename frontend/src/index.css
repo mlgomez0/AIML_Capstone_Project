@@ -16,7 +16,9 @@ html, body, #root {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: #9E9E9E;
+  background-image: url("background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 0;
   padding: 0;
 }

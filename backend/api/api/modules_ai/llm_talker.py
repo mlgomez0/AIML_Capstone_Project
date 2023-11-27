@@ -17,7 +17,7 @@ class LlmTalker:
     def start_chat(self, question):
         repo_id = "google/flan-t5-xxl"
         llm = HuggingFaceHub(
-        repo_id=repo_id, model_kwargs={"temperature": 0.5, "max_length": 512}
+        repo_id=repo_id, model_kwargs={"temperature": 1, "max_length": 1000000}
         )
         llm_chain = load_qa_chain(llm, chain_type='stuff')
         chroma = VectoreStores()

@@ -21,12 +21,19 @@ class DataTransformer:
 
     def load_tokens_from_docs(
             self, docs, method='RecursiveCharacter',
-            chunk_size=1500, chunk_overlap=150
+            chunk_size=1024, chunk_overlap=64
         ):
         if method == 'RecursiveCharacter':
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size = chunk_size,
-                chunk_overlap = chunk_overlap
+                chunk_overlap = chunk_overlap,
+                separators=['\n\n', '\n', '(?=>\. )', ' ', '']
+            )
+            self.tokens = text_splitter.split_documents(docs)
+        else:
+            text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap
             )
             self.tokens = text_splitter.split_documents(docs)
 

@@ -10,11 +10,10 @@ This project contains the backend for the natural language processing project.
 - [Contributing](#contributing)
 - [License](#license)
 
-# .ENV
-
-Set the following environmental variables
-
-HUGGINGFACEHUB_API_TOKEN
+# Export the following env variables
+```bash
+export HUGGINGFACEHUB_API_TOKEN='your api key'
+```
 
 ## Installation
 

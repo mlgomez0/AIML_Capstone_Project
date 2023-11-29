@@ -20,6 +20,11 @@ export const ChatInput = ({ onSendMessage }) => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Write a message..."
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        handleSubmit(e);
+                    }
+                }}
             />
             <button type="button" onClick={handleSubmit}>Send</button>
         </div>

@@ -14,21 +14,22 @@ const client = axios.create({
 
 
 function Login(props) {
-    const navigate = useNavigate()
-    const [error, setError] = useState(false)
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
 
-    
+    const navigate = useNavigate()
+    const [ error, setError ] = useState(false)
+    const [ username, setUsername ] = useState('')
+    const [ password, setPassword ] = useState('')
+
+
     function handleLogin(e) {
         e.preventDefault();
         client.post(
-        "/login",
-        {
-            username: username,
-            password: password
-        }
-        ).then(function(res) {
+            "/login",
+            {
+                username: username,
+                password: password
+            }
+        ).then(function (res) {
             Cookies.set('userLoggedIn', true)
             navigate("/home")
             props.toggle(true)

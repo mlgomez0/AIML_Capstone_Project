@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import predict
+from . import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('predict', predict, name='item-list')
+    path('predict', views.predict, name='item-list'),
+	path('login', views.UserLogin.as_view(), name='login'),
+	path('logout', views.UserLogout.as_view(), name='logout'),
+	path('chat', views.ChatView.as_view(), name='chat'),
 ]

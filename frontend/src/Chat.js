@@ -1,27 +1,63 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Chat.css';
 import { ChatInput } from './ChatInput';
+import axios from "axios";
+import Cookies from 'js-cookie'
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
+
 
 const Chat = () => {
-
-    const apiUrl = useRef('http://127.0.0.1:8000')
+    const client = axios.create({
+        baseURL: process.env.REACT_APP_API_URL
+    });
     const [ messages, setMessages ] = useState([]);
+
+    useEffect(() => {
+        const fetchChatHistory = async () => {
+          try {
+            const response = await client.get("/history");
+            const chatHistory = JSON.parse(response.data.chat)
+            setMessages(chatHistory)
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+        fetchChatHistory();
+    }, []);
+
+    useEffect(()=>{
+        if (messages.length != 0) {
+            client.post(
+                "/history",
+                {
+                    chat: JSON.stringify(messages)
+                })
+                .then(data => {
+                    console.log(data.status)
+                })
+                .catch(err => console.log(err));
+            }
+    }, [messages])
 
     const handleSendMessage = (message) => {
 
         setMessages(x => [ ...x, { user: 'you', text: message } ]);
-
-        fetch(`${apiUrl.current}/predict?q=${encodeURIComponent(message)}`, { method: 'POST' })
-            .then(response => response.json())
+        client.post(
+            "/chat",
+            {
+                q: message
+            })
             .then(data => {
                 setMessages(x => [ ...x, {
-                    user: 'bot', text: data.text
+                    user: 'bot', text: data.data.chat.text
                 } ]);
             })
             .catch(err => console.log(err));
-
     };
-
 
 
     return (

@@ -1,0 +1,41 @@
+.headervtl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #65b7cc;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.navi-bar {
+    display: flex;
+}
+
+.navi-bar a {
+    text-decoration: none;
+    color: white;
+    margin-right: 20px;
+}
+
+.loginout {
+    display: flex;
+    align-items: center;
+}
+
+.logoin-button,
+.logout-button {
+    padding: 8px 16px;
+    margin-left: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid white;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+    color: white;
+    text-decoration: none;
+}
+
+/* Add styles for the "active" NavLink */
+.active {
+    font-weight: bold;
+}

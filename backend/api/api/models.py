@@ -6,3 +6,4 @@ class ApiResponse(models.Model):
 class ChatHistory(models.Model):
     username = models.CharField(max_length=100)
     text_field = models.TextField()
+    rating = models.FloatField(null=True, blank=True)

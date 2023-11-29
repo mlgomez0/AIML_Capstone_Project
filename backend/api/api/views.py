@@ -56,6 +56,29 @@ class ChatHistoryStore(APIView):
                 defaults={'text_field': data['chat']}
             )
 		return Response(status=status.HTTP_200_OK)
+	
+class ChatRatingHistory(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (SessionAuthentication,)
+	##
+	def get(self, request):
+		try:
+			record = ChatHistory.objects.get(username=request.user.username)
+		except ChatHistory.DoesNotExist:
+			return JsonResponse({'error': 'Record not found'}, status=404)
+		response_data = {
+			'username': record.username,
+			'rating': record.rating,
+    	}
+		return JsonResponse(response_data, status=status.HTTP_200_OK)
+	
+	def post(self, request):
+		data = request.data
+		ChatHistory.objects.update_or_create(
+                username=request.user.username,
+                defaults={'rating': data['rating']}
+            )
+		return Response(status=status.HTTP_200_OK)
 
 
 class UserLogout(APIView):

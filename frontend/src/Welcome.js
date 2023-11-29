@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom'
 
 function Welcome() {
   const navigate = useNavigate()
-  const [error, setError] = useState(false)
+  const [ error, setError ] = useState(false)
   const loggedIn = Cookies.get('userLoggedIn')
 
-  function handleClick () {
-    if (loggedIn){
+  function handleClick() {
+    if (loggedIn) {
       navigate("/home")
     } else {
       setError(true)
@@ -28,7 +28,7 @@ function Welcome() {
         <img src={logo} className="Welcome-logo" alt="logo" />
         {
           error ? <p>Please, Login</p> :
-          <button className="Welcome-button" onClick={handleClick}>Start</button>
+            <button className="Welcome-button" onClick={handleClick}>Start</button>
         }
       </header>
     </div>

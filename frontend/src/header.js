@@ -17,22 +17,22 @@ const client = axios.create({
 
 function Header() {
     const navigate = useNavigate()
-    const [seen, setSeen] = useState(false)
-    const [loggedIn, setLoggedIn] = useState(Cookies.get('userLoggedIn') === 'true')
+    const [ seen, setSeen ] = useState(false)
+    const [ loggedIn, setLoggedIn ] = useState(Cookies.get('userLoggedIn') === 'true')
 
-    function togglePop (success_login=false) {
-        if (success_login===true) {
+    function togglePop(success_login = false) {
+        if (success_login === true) {
             setLoggedIn(true)
         }
         setSeen(!seen)
     }
 
 
-    function handleLogout (e) {
+    function handleLogout(e) {
         e.preventDefault();
         client.post(
-        "/logout",
-        ).then(function(res) {
+            "/logout",
+        ).then(function (res) {
             Cookies.remove('userLoggedIn')
             setLoggedIn(false)
             navigate("/")
@@ -41,25 +41,23 @@ function Header() {
         })
     }
     return (
-        <div>
+        <>
             <header className="headervtl">
                 <nav className="navi-bar">
-                <NavLink exact activeClassName="active" to="/home">
-                    Home
-                </NavLink>
-                <NavLink activeClassName="active" to="/">
-                    Welcome
-                </NavLink>
+                    <NavLink exact activeClassName="active" to="/home">
+                        Home
+                    </NavLink>
+                    <NavLink activeClassName="active" to="/">
+                        Welcome
+                    </NavLink>
                 </nav>
                 <div className="loginout">
                     {loggedIn ? <button className="logoin-button" onClick={handleLogout}>Logout</button>
-                    : <button className="logout-button" onClick={togglePop}>Login</button>}
+                        : <button className="logout-button" onClick={togglePop}>Login</button>}
                 </div>
-            </header>
-            <div>
                 {seen ? <Login toggle={togglePop} /> : null}
-            </div>
-        </div>
+            </header>
+        </>
     );
 }
 export default Header;

@@ -1,11 +1,12 @@
 .headervtl {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 10px;
     background-color: #65b7cc;
     color: white;
-    margin-bottom: 30px;
+    height: 53px;
+    line-height: 53px;
+    justify-content: space-between;
 }
 
 .navi-bar {

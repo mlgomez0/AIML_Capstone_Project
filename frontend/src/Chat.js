@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Chat.css';
 import { ChatInput } from './ChatInput';
 import axios from "axios";
-import Cookies from 'js-cookie'
+import ChatRating from './ChatRating'
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -15,6 +15,7 @@ const Chat = () => {
         baseURL: process.env.REACT_APP_API_URL
     });
     const [ messages, setMessages ] = useState([]);
+    const [seen, setSeen] = useState(false)
 
     useEffect(() => {
         const fetchChatHistory = async () => {
@@ -59,6 +60,10 @@ const Chat = () => {
             .catch(err => console.log(err));
     };
 
+    function togglePop () {
+        setSeen(!seen)
+    }
+
 
     return (
         <div className="chat-container">
@@ -69,7 +74,11 @@ const Chat = () => {
                     </div>
                 ))}
             </div>
+            <button className="buttonrate" onClick={togglePop}>Rate The Experience</button>
             <ChatInput onSendMessage={handleSendMessage} />
+            <div>
+                {seen ? <ChatRating toggle={togglePop} /> : null}
+            </div>
         </div>
     );
 };

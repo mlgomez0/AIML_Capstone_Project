@@ -25,4 +25,5 @@ urlpatterns = [
 	path('logout', views.UserLogout.as_view(), name='logout'),
 	path('chat', views.ChatView.as_view(), name='chat'),
     path('history', views.ChatHistoryStore.as_view(), name='history'),
+    path('rating', views.ChatRatingHistory.as_view(), name='rating'),
 ]

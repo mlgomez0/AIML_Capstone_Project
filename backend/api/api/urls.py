@@ -21,8 +21,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('predict', views.predict, name='item-list'),
 	path('login', views.UserLogin.as_view(), name='login'),
 	path('logout', views.UserLogout.as_view(), name='logout'),
 	path('chat', views.ChatView.as_view(), name='chat'),
+    path('history', views.ChatHistoryStore.as_view(), name='history'),
 ]

@@ -5,11 +5,13 @@ from .models import ApiResponse, ChatHistory
 from .modules_ai.llm_talker import LlmTalker
 from .serializers import ItemSerializer
 from django.contrib.auth import login, logout
-from rest_framework.authentication import SessionAuthentication
+from .serializers import UserLoginSerializer
+from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserLoginSerializer
-from rest_framework import permissions, status
+from rest_framework import permissions
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework import status
 
 
 conversations = {}
@@ -23,20 +25,27 @@ def get_client_ip(request):
     return ip
 
 class UserLogin(APIView):
-	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (SessionAuthentication,)
-	##
-	def post(self, request):
-		data = request.data
-		serializer = UserLoginSerializer(data=data)
-		if serializer.is_valid(raise_exception=True):
-			user = serializer.check_user(data)
-			login(request, user)
-			return Response(serializer.data, status=status.HTTP_200_OK)
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()  # Empty or include any other desired authentication classes
+
+    def post(self, request):
+        data = request.data
+        serializer = UserLoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.check_user(data)
+
+            # Create or retrieve a token for the authenticated user
+            token, created = Token.objects.get_or_create(user=user)
+
+            # Include token in response
+            return Response({
+                'token': token.key,
+                'user_data': serializer.data
+            }, status=status.HTTP_200_OK)
 		
 class ChatHistoryStore(APIView):
-	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (SessionAuthentication,)
+	authentication_classes = [SessionAuthentication, TokenAuthentication]
+	permission_classes = [permissions.IsAuthenticated]
 	##
 	def get(self, request):
 		try:
@@ -58,9 +67,10 @@ class ChatHistoryStore(APIView):
 		return Response(status=status.HTTP_200_OK)
 	
 class ChatRatingHistory(APIView):
-	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (SessionAuthentication,)
-	##
+
+	authentication_classes = [SessionAuthentication, TokenAuthentication]
+	permission_classes = [permissions.IsAuthenticated]
+
 	def get(self, request):
 		try:
 			record = ChatHistory.objects.get(username=request.user.username)

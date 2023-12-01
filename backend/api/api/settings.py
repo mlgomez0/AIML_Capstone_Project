@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%qbuxhy4whkn#tz_fq9wy2c3q$wt09ms7*^8*31cd*%u&o@zs9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['capstone-project-api.azurewebsites.net']
 
 # CORS_ALLOWED_ORIGINS = [
 #     'http://127.0.0.1:3000',
@@ -147,4 +147,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_CREDENTIALS = True
 
 
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000', 'https://capstone-project-api.azurewebsites.net']

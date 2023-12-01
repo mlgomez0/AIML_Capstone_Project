@@ -13,7 +13,7 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 from rest_framework import status
 import os
 
-print(f"Starting HUGGINGFACEHUB_API_TOKEN={os.getenv('HUGGINGFACEHUB_API_TOKEN')}")
+#print(f"Starting HUGGINGFACEHUB_API_TOKEN={os.getenv('HUGGINGFACEHUB_API_TOKEN')}")
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

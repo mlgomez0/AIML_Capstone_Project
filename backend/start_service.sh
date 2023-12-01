@@ -1,6 +1,6 @@
 
 echo "Establishing environment variables..."
-export HUGGINGFACEHUB_API_TOKEN=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
+python export HUGGINGFACEHUB_API_TOKEN=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
 
 # Start service
 echo "Starting service..."

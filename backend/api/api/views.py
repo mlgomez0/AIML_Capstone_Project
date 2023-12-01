@@ -1,6 +1,5 @@
 from rest_framework.response import Response
 from django.http import JsonResponse
-
 from .models import ApiResponse, ChatHistory
 from .modules_ai.llm_talker import LlmTalker
 from .serializers import ItemSerializer
@@ -12,9 +11,9 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework import status
+import os
 
-
-conversations = {}
+print(f"Starting HUGGINGFACEHUB_API_TOKEN={os.getenv('HUGGINGFACEHUB_API_TOKEN')}")
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -46,7 +45,7 @@ class UserLogin(APIView):
 class ChatHistoryStore(APIView):
 	authentication_classes = [SessionAuthentication, TokenAuthentication]
 	permission_classes = [permissions.IsAuthenticated]
-	##
+	
 	def get(self, request):
 		try:
 			record = ChatHistory.objects.get(username=request.user.username)
@@ -67,7 +66,6 @@ class ChatHistoryStore(APIView):
 		return Response(status=status.HTTP_200_OK)
 	
 class ChatRatingHistory(APIView):
-
 	authentication_classes = [SessionAuthentication, TokenAuthentication]
 	permission_classes = [permissions.IsAuthenticated]
 
@@ -90,18 +88,17 @@ class ChatRatingHistory(APIView):
             )
 		return Response(status=status.HTTP_200_OK)
 
-
 class UserLogout(APIView):
-	permission_classes = (permissions.AllowAny,)
-	authentication_classes = ()
+	authentication_classes = [SessionAuthentication, TokenAuthentication]
+	permission_classes = [permissions.IsAuthenticated]
+
 	def post(self, request):
 		logout(request)
 		return Response(status=status.HTTP_200_OK)
 	
 class ChatView(APIView):
-	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (SessionAuthentication,)
-	##
+	authentication_classes = [SessionAuthentication, TokenAuthentication]
+	permission_classes = [permissions.IsAuthenticated]
 
 	def get(self, request):
 		return Response(status=status.HTTP_200_OK)
@@ -114,4 +111,3 @@ class ChatView(APIView):
 		response.text = answer
 		serializer = ItemSerializer(response, many=False)
 		return Response({'chat': serializer.data}, status=status.HTTP_200_OK)
-	

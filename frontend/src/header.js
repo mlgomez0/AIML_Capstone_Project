@@ -9,6 +9,7 @@ import './header.css'
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
+axios.defaults.headers.post[ 'Authorization' ] = 'Token ' + Cookies.get('token');
 
 const client = axios.create({
     baseURL: process.env.REACT_APP_API_URL

@@ -7,6 +7,7 @@ import './Login.css'
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
+axios.defaults.headers.post[ 'Authorization' ] = 'Token ' + Cookies.get('token');
 
 const client = axios.create({
     baseURL: process.env.REACT_APP_API_URL
@@ -23,14 +24,9 @@ function Login(props) {
 
     function handleLogin(e) {
         e.preventDefault();
-        client.post(
-            "/login",
-            {
-                username: username,
-                password: password
-            }
-        ).then(function (res) {
+        client.post("/login", { username, password }).then(function (res) {
             Cookies.set('userLoggedIn', true)
+            Cookies.set('token', res.data.token, { secure: true }) // Save token to cookie
             navigate("/home")
             props.toggle(true)
         }).catch((error) => {

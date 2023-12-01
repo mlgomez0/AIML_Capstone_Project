@@ -7,20 +7,20 @@ import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Typography from '@mui/material/Typography';
-
+import Cookies from 'js-cookie'
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
-      color: '#ff6d75',
+        color: '#ff6d75',
     },
     '& .MuiRating-iconHover': {
-      color: '#ff3d47',
+        color: '#ff3d47',
     },
 });
 
 
 function ChatRating(props) {
-    const [rating, setRating] = useState(2)
+    const [ rating, setRating ] = useState(2)
 
     function handleRating(value, newValue) {
         setRating(newValue)
@@ -31,15 +31,17 @@ function ChatRating(props) {
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
         axios.defaults.withCredentials = true;
+        axios.defaults.headers.post[ 'Authorization' ] = 'Token ' + Cookies.get('token');
+
         const client = axios.create({
             baseURL: process.env.REACT_APP_API_URL,
         });
         client.post(
-        "/rating",
-        {
-            rating: rating,
-        },
-        ).then(function(res) {
+            "/rating",
+            {
+                rating: rating,
+            },
+        ).then(function (res) {
             props.toggle()
         }).catch((error) => {
             console.log(error)
@@ -51,13 +53,13 @@ function ChatRating(props) {
             baseURL: process.env.REACT_APP_API_URL,
         });
         const fetchChatRating = async () => {
-          try {
-            const response = await client.get("/rating");
-            const chatRating = JSON.parse(response.data.rating)
-            setRating(chatRating)
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
+            try {
+                const response = await client.get("/rating");
+                const chatRating = JSON.parse(response.data.rating)
+                setRating(chatRating)
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         };
         fetchChatRating();
     }, []);
@@ -70,7 +72,7 @@ function ChatRating(props) {
                     sx={{
                         '& > legend': { mt: 2 },
                     }}
-                    >
+                >
                     <Typography component="legend">Rate your experience with VTL!</Typography>
                     <StyledRating
                         name="customized-color"

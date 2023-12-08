@@ -69,4 +69,9 @@ vectorDb.similarity_search(question,k=3)
 vectorDb._collection.count()
 
 ```
+
 Currently, the project only supports PDF format
+
+
+#### Related Links
+[Run and publish projects](./run.md)

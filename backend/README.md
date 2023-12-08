@@ -10,7 +10,7 @@ This project contains the backend for the natural language processing project.
 - [Contributing](#contributing)
 - [License](#license)
 
-# Export the following env variables
+## Export the following env variables
 ```bash
 export HUGGINGFACEHUB_API_TOKEN='your api key'
 ```
@@ -23,7 +23,22 @@ Go to the backend/ directory and use the following command.
 pip install -r requirements.txt
 ```
 
-To start the server, run the following command in the directory `backend/api` and then navigate to `http://127.0.0.1:8000/items` in the browser:
+## Project Directory
+
+Go to `backend/api`
+
+
+## Create superuser
+
+```bash
+python manage.py createsuperuser
+```
+
+User the admin credential to navigate the app or alternatively, you can create a new user going to http://127.0.0.1:8000/admin once the server is running.
+
+## Start the app
+
+To start the server, run the following command in the directory `backend/api` and then navigate to `http://127.0.0.1:8000` in the browser:
 
 ```bash
 python manage.py runserver
@@ -33,19 +48,17 @@ python manage.py runserver
 
 ## ChromaDB
 
-This is a in-unit vector store. To create embeddings from files in a folder and store them in a vector store, you can run the following script inside the backend directory:
+This is a in-unit vector store. To create embeddings from files in a folder and store them in a vector store, you can run the following script inside the backend/api directory:
 
 ```bash
-CHROMA_PATH=docs/chroma/ python load_embeddings.py chroma files_directory
+CHROMA_PATH=docs/chroma/ python ../load_embeddings.py chroma files_directory
 ```
 
 Then to load the vector store and do similarity searh, use the following:
 
-Set the environmental variable "CHROMA_PATH" and create an embedder.
+Set the environmental variable "CHROMA_PATH".
 
 ```bash
-from backend.vector_store import VectoreStores
-from backend.data_transformer import DataTransformer
 
 data_transformer = DataTransformer()
 embedder = data_transformer.get_spacy_embedding()

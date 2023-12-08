@@ -19,16 +19,14 @@
 }
 
 .Welcome-button {
-  color: #61dafb;
   background-color: #65b7cc;
-  border: none;
   color: white;
-  padding: 20px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  border-radius: 50%;
-
+  border-radius: 5px;
+  border: solid 1px white;
 }

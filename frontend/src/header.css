@@ -31,9 +31,9 @@
     cursor: pointer;
     background-color: transparent;
     border: 1px solid white;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
     color: white;
     text-decoration: none;
+    border-radius: 5px;
 }
 
 /* Add styles for the "active" NavLink */

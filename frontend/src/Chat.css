@@ -33,13 +33,16 @@
 .chat-input {
     display: flex;
     height: 60px;
+    border-bottom-right-radius: 3px;
 }
 
 .chat-input input {
-    flex: 1;
+    flex: 1 1;
     padding: 10px;
     border: none;
     border-top: 1px solid #ddd;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1em;
 }
 
 .chat-input button {
@@ -48,8 +51,13 @@
     background-color: #65b7cc;
     color: white;
     cursor: pointer;
+    border-bottom-right-radius: 5px;
 }
 
 .buttonrate {
     background-color: pink;
+    border: none;
+    padding: 6px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1em;
 }

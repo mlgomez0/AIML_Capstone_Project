@@ -21,6 +21,8 @@ html, body, #root {
   background-size: cover;
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1em;
 }
 
 #root {

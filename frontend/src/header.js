@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Login from './LogIn';
 import './header.css';
+import { NavLink } from "react-router-dom";
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -44,12 +45,12 @@ function Header() {
         <>
             <header className="headervtl">
                 <nav className="navi-bar">
-                    {/* <NavLink exact activeClassName="active" to="/home">
+                    <NavLink exact activeClassName="active" to="/home">
                         Home
-                    </NavLink> */}
-                    {/* <NavLink activeClassName="active" to="/">
+                    </NavLink>
+                    <NavLink activeClassName="active" to="/">
                         Welcome
-                    </NavLink> */}
+                    </NavLink>
                 </nav>
                 <div className="loginout">
                     {loggedIn ? <button

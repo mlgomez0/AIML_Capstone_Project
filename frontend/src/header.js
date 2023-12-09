@@ -35,6 +35,7 @@ function Header() {
             "/logout",
         ).then(function (res) {
             Cookies.remove('userLoggedIn')
+            Cookies.remove('token')
             setLoggedIn(false)
             navigate("/")
         }).catch((error) => {

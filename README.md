@@ -120,7 +120,7 @@ VTL performs well at answering questions about a given company; in this project,
 
 Additionally, we assessed the impact of the embeddings in the results, concluding that this selection can highly influence the quality of the responses. Furthermore, we could pass a template to the model to shape the model responses.
 
-Additionally, running a Llama 7B with anakin87/zephyr-7b-alpha-sharded CPU took 20 minutes on average in the responses. Therefore, for this project, the best option was to use the free inference API from Hugging Face; with this option, we could reduce the response time to less than a second.
+Additionally, running a Llama 7B with anakin87/zephyr-7b-alpha-sharded CPU took 20 seconds on average in the responses. Therefore, for this project, the best option was to use the free inference API from Hugging Face; with this option, we could reduce the response time to less than a second.
 
 Future work on VTL would aim to conduct several prompt engineering strategies to improve the performance of the LLM model and the overall application:
 

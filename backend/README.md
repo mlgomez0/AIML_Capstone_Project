@@ -72,6 +72,21 @@ vectorDb._collection.count()
 
 Currently, the project only supports PDF format
 
+## To use the vector store Pinecone
+
+Configure the following in your .env
+```
+PINECONE_API_KEY=xxxxx
+PINECONE_ENV=xxxx
+PINECONE_METRICS=xxxx
+PINECONE_DIMENSIONS=xxx
+```
+## Running the Backend Tests
+
+```
+python -m unittest backend/tests/file_name.py
+```
+
 
 #### Related Links
 [Run and publish projects](./run.md)

@@ -66,23 +66,23 @@ The command to run the script is below:
 CHROMA_PATH=VectorDB_path python ../load_embeddings.py chroma files_directory_path
 ```
 
-### 5.	Vector Store:
+### 4.	Vector Store:
 
 We explored two different vector stores, Pinecone and ChromaDB. Pinecone stores vectors in the cloud and ChromaDB on disk. After setting up and testing the two options, we decided to move forward with ChomeDB as this last one gave more flexibility to explore than Pinecone, which allows just one vector store in the free account.
 
-### 6.	Large Language Model:
+### 5.	Large Language Model:
 
 We tested two LLM for this project:
 
 - anakin87/zephyr-7b-alpha-sharded: This is a fine-tuned Llama (Meta) version available in Hugging Face. The answers from this model are remarkable. However, it is too large to use the Hugging Face free inference API. Therefore, we had to download and use the model with the local GPU. The answers from this model took 20 minutes on average. Consequently, we decided to do not to proceed with it.
 - google/flan-t5-xxl: This model combines two; FLAN is a Finetuned Language Net, and T5 is a language model by Google; the model has been trained with 11B parameters. It delivers good answers and has the advantage that it can be used though the free inference API from Hugging Face, which helped us to get faster answers from the model. Therefore, we decided to move ahead with this one.
 
-### 7.	Embeddings:
+### 6.	Embeddings:
 
 We explored two types of embeddings: Spacy Embeddings and Hugging Face
 Embeddings. For this project, the last ones performed better.
 
-### 8.	Relational Database:
+### 7.	Relational Database:
 
 We use an SQLite database to store users, chat history, and ratings.
 
